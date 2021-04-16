@@ -2,7 +2,7 @@
  * Calculadora.c
  *
  *      Trabajo Práctico 1
- *      Author: Jorge García
+ *      Author: Jorge García 1°C
  */
 
 #include "Calculadora.h"
