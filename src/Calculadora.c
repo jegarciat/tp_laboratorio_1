@@ -117,7 +117,7 @@ void utn_MostrarFactorial(long int factorial1, long int factorial2)
 			break;
 
 		default:
-			printf("y el factorial de B es: %ld", factorial2);
+			printf("    y el factorial de B es: %ld", factorial2);
 			break;
 	}
 }
