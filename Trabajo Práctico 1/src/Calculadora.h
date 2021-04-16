@@ -2,7 +2,7 @@
  * Calculadora.h
  *
  *      Trabajo Práctico 1
- *      Author: Jorge García
+ *      Author: Jorge García 1°C
  */
 
 #ifndef CALCULADORA_H_
