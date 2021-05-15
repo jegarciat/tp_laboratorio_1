@@ -5,11 +5,12 @@ int MainMenu()
 {
 	int option;
 
-	printf("\n1. Alta\n");
-	printf("\n2. Modificar empleado\n");
-	printf("\n3. Baja\n");
-	printf("\n4. Informes\n");
-	printf("\n5. Salir\n");
+	printf("\n GESTIÓN DE EMPLEADOS \n");
+	printf("\n 1. Alta\n");
+	printf("\n 2. Modificar empleado\n");
+	printf("\n 3. Baja\n");
+	printf("\n 4. Informes\n");
+	printf("\n 5. Salir\n");
 	option = utn_getEntero("\nElija un opción: ", "\nOpción inválida, ingrese nuevamente: ", 1, 5);
 
 	return option;

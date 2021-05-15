@@ -39,14 +39,14 @@ int main(void) {
 				auxIndex = Employees_SearchFree(employees, QTY_EMPLOYEES);
 				if(auxIndex == -1)
 				{
-					printf("\n[NO HAY ESPACIO DISPONIBLE]\n");
+					printf("\n\t[NO HAY ESPACIO DISPONIBLE]\n");
 				}
 				else
 				{
 					auxAdd = addEmployee(employees, QTY_EMPLOYEES, auxIndex);
 					if(auxAdd != -1)
 					{
-						printf("\n[REGISTRO EXITOSO]\n");
+						printf("\n\t[REGISTRO EXITOSO]\n");
 					}
 					else
 					{
@@ -62,15 +62,15 @@ int main(void) {
 					switch(modifyEmployee)
 					{
 						case 0:
-							printf("\n[MODIFICACIÓN EXITOSA]\n");
+							printf("\n\t[MODIFICACIÓN EXITOSA]\n");
 							break;
 
 						case -1:
-							printf("\n[EL ID INGRESADO NO EXISTE]\n");
+							printf("\n\t[EL ID INGRESADO NO EXISTE]\n");
 							break;
 
 						case -2:
-							printf("\n[MODIFICACIÓN CANCELADA]\n");
+							printf("\n\t[MODIFICACIÓN CANCELADA]\n");
 							break;
 					}
 				}
@@ -89,15 +89,15 @@ int main(void) {
 					switch(auxRemove)
 					{
 						case 0:
-							printf("\n[BAJA EXITOSA]\n");
+							printf("\n\t[BAJA EXITOSA]\n");
 						break;
 
 						case -1:
-							printf("\n[EL ID INGRESADO NO EXISTE]\n");
+							printf("\n\t[EL ID INGRESADO NO EXISTE]\n");
 						break;
 
 						case -2:
-							printf("\n[BAJA CANCELADA]\n");
+							printf("\n\t[BAJA CANCELADA]\n");
 						break;
 					}
 
