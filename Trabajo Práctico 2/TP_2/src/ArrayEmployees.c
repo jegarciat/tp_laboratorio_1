@@ -69,7 +69,7 @@ int addEmployee(sEmployee* list, int len, int auxIndex)
 	{
 		utn_getString("\nIngrese el nombre del empleado: ", list[auxIndex].name);
 		utn_getString("\nIngrese el apellido del empleado: ", list[auxIndex].lastName);
-		list[auxIndex].salary = utn_getFloat("\nIngrese el salario del empleado: ", "\nReingrese una cifra válida [hasta 100000]: ", 1, 100000);
+		list[auxIndex].salary = utn_getFloat("\nIngrese el salario del empleado: ", "\nReingrese una cifra válida [hasta 100000]: ", 1, 1000000);
 		printSectors();
 		list[auxIndex].sector = utn_getEntero("\nIngrese el ID del sector de el empleado: ", "\n¡Error! Reingrese un sector válido: ", 1000, 1002);
 		list[auxIndex].isEmpty = OCCUPIED;
@@ -294,11 +294,13 @@ int printEmployees(sEmployee* list, int len)
 
 void printEmployee(sEmployee auxEmployee)
 {
-	printf("\n| ID: %2d | NOMBRE: %10s | APELLIDO: %10s | SALARIO: %2.2f | SECTOR: %2d |", auxEmployee.id,
-																			               auxEmployee.name,
-																			               auxEmployee.lastName,
-																			               auxEmployee.salary,
-																			               auxEmployee.sector);
+	printf("------------------------------------------------------------------------------------------------\n");
+	printf("| ID: %2d | NOMBRE: %10s | APELLIDO: %13s | SALARIO: %12.2f | SECTOR: %2d |", auxEmployee.id,
+																			              auxEmployee.name,
+																			              auxEmployee.lastName,
+																			              auxEmployee.salary,
+																			              auxEmployee.sector);
+	printf("\n------------------------------------------------------------------------------------------------\n");
 }
 
 void printSectors()

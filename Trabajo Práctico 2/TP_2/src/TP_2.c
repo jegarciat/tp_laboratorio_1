@@ -20,16 +20,16 @@ int main(void) {
 
 	char answer;
 	int auxIndex;
-	int add;
+	int auxAdd;
 	int auxID;
-	int remove;
-	int modify;
+	int auxRemove;
+	int modifyEmployee;
 
 	setbuf(stdout, NULL);
 
 	initEmployees(employees, QTY_EMPLOYEES);
 
-	TestEmployees(employees, 8);
+	//TestEmployees(employees, 8);
 
 	do
 	{
@@ -43,8 +43,8 @@ int main(void) {
 				}
 				else
 				{
-					add = addEmployee(employees, QTY_EMPLOYEES, auxIndex);
-					if(add != -1)
+					auxAdd = addEmployee(employees, QTY_EMPLOYEES, auxIndex);
+					if(auxAdd != -1)
 					{
 						printf("\n[REGISTRO EXITOSO]\n");
 					}
@@ -58,8 +58,8 @@ int main(void) {
 			case 2:
 				if((printEmployees(employees, QTY_EMPLOYEES)) != -1)
 				{
-					modify = ModifyEmployee(employees, QTY_EMPLOYEES);
-					switch(modify)
+					modifyEmployee = ModifyEmployee(employees, QTY_EMPLOYEES);
+					switch(modifyEmployee)
 					{
 						case 0:
 							printf("\n[MODIFICACIÓN EXITOSA]\n");
@@ -84,9 +84,9 @@ int main(void) {
 				if((printEmployees(employees, QTY_EMPLOYEES)) != -1)
 				{
 					auxID = getInt("\n\nIngrese el ID del empleado que quiere dar de baja: ");
-					remove = removeEmployee(employees, QTY_EMPLOYEES, auxID);
+					auxRemove = removeEmployee(employees, QTY_EMPLOYEES, auxID);
 
-					switch(remove)
+					switch(auxRemove)
 					{
 						case 0:
 							printf("\n[BAJA EXITOSA]\n");
