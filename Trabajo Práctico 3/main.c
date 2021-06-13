@@ -39,7 +39,7 @@ int main()
             case 1:
             	if(datosCargadosText == 0 && datosCargadosBin == 0)
             	{
-					controller_loadFromText("data.csv", listaEmpleados);
+					controller_loadFromText("test.csv", listaEmpleados);
 					datosCargadosText = 1;
             	}
             	else
@@ -51,7 +51,7 @@ int main()
             case 2:
             	if(datosCargadosBin == 0 && datosCargadosText == 0)
             	{
-            		controller_loadFromBinary("data.bin", listaEmpleados);
+            		controller_loadFromBinary("test.bin", listaEmpleados);
             		datosCargadosBin = 1;
             	}
             	else
@@ -79,7 +79,7 @@ int main()
             case 8:
             	if(datosCargadosBin == 1 || datosCargadosText == 1)
             	{
-					controller_saveAsText("data.csv", listaEmpleados);
+					controller_saveAsText("test.csv", listaEmpleados);
             	}
             	else
             	{
@@ -89,7 +89,7 @@ int main()
             case 9:
             	if(datosCargadosBin == 1 || datosCargadosText == 1)
             	{
-            		controller_saveAsBinary("data.bin", listaEmpleados);
+            		controller_saveAsBinary("test.bin", listaEmpleados);
             	}
             	else
             	{

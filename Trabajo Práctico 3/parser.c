@@ -8,7 +8,7 @@
  *
  * \param path char* Nombre del archivo de donde se cargaran los datos
  * \param pArrayListEmployee LinkedList* Array del LinkedList
- * \return int [-1] Si hay errores - [ID Máximo] Si esta ok
+ * \return int [-1] Si hay errores - [ID Máximo] En caso de exito
  *
  */
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
@@ -55,7 +55,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
  *
  * \param path char* Nombre del archivo de donde se cargaran los datos
  * \param pArrayListEmployee LinkedList* Array del LinkedList
- * \return int [-1] Si hay errores - [ID Máximo] Si esta ok
+ * \return int [-1] Si hay errores - [ID Máximo] En caso de exito
  *
  */
 int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)

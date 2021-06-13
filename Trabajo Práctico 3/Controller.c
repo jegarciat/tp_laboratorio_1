@@ -8,6 +8,11 @@
 
 static int controller_IdIncremental = 0;
 
+/** \brief Genera un ID único incremental en 1.
+ *
+ * \return int controller_IdIncremental+1
+ *
+ */
 static int controller_ObtenerID()
 {
 	return controller_IdIncremental += 1;
@@ -15,9 +20,9 @@ static int controller_ObtenerID()
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Dirección del archivo de donde se cargaran los datos
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
@@ -56,11 +61,11 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
     return estado;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+/** \brief Carga los datos de los empleados desde el archivo data.bin (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Dirección del archivo de donde se cargaran los datos
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
@@ -99,6 +104,11 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     return estado;
 }
 
+/** \brief Guarda el controller_IdIncremental en el archivo ID_Maximo.csv
+ *
+ * \return int [-1] Si hay un error al abrir el archivo - [0] Si se logro guardar
+ *
+ */
 int EscribirArchivoID()
 {
 	FILE* pArchivo_ID;
@@ -116,6 +126,11 @@ int EscribirArchivoID()
 	return estado;
 }
 
+/** \brief Carga el ID máximo de el archivo ID_Maximo.csv
+ *
+ * \return int [-1] Si hay un error al abrir el archivo - [0] Si se logro cargar
+ *
+ */
 int LeerArchivoID()
 {
 	FILE* pArchivo_ID;
@@ -138,9 +153,8 @@ int LeerArchivoID()
 
 /** \brief Alta de empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores o si se cancelo el alta - [0] Si se agrego el empleado
  *
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
@@ -154,7 +168,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 	if(controller_IdIncremental == 0)
 	{
 		LeerArchivoID();
-		//printf("\n[ID leido de ID_Maximo]: %d\n", controller_IdIncremental); // Printf de control
+		//printf("\n[ID leido de ID_Maximo]: %d\n", controller_IdIncremental); //Printf de control
 	}
 
 	if(pArrayListEmployee != NULL)
@@ -196,11 +210,10 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     return estado;
 }
 
-/** \brief Modificar datos de empleado
+/** \brief Modificar datos de un empleado
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
@@ -236,7 +249,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 			{
 				case 1:
 					printf("\n[MODIFICACION DEL NOMBRE]\n");
-					if(Edit_Nombre(pArrayListEmployee, auxID, indexEdit) == 0)
+					if(Edit_Nombre(pArrayListEmployee, auxID) == 0)
 					{
 						printf("\n\t¡MODIFICACIÓN EXITOSA!\n");
 						controller_MostrarEmpleado(pArrayListEmployee, indexEdit);
@@ -245,7 +258,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
 				case 2:
 					printf("\n[MODIFICACION DE HORAS TRABAJADAS]\n");
-					if(Edit_Horas(pArrayListEmployee, auxID, indexEdit) == 0)
+					if(Edit_Horas(pArrayListEmployee, auxID) == 0)
 					{
 						printf("\n\t¡MODIFICACIÓN EXITOSA!\n");
 						controller_MostrarEmpleado(pArrayListEmployee, indexEdit);
@@ -254,7 +267,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
 				case 3:
 					printf("\n[MODIFICACIÓN DEL SUELDO]\n");
-					if(Edit_Sueldo(pArrayListEmployee, auxID, indexEdit) == 0)
+					if(Edit_Sueldo(pArrayListEmployee, auxID) == 0)
 					{
 						printf("\n\t¡MODIFICACIÓN EXITOSA!\n");
 						controller_MostrarEmpleado(pArrayListEmployee, indexEdit);
@@ -273,7 +286,14 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     return estado;
 }
 
-int Edit_Nombre(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
+/** \brief Modifica el nombre de un empleado
+ *
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \param idEdit int ID del empleado a modificar
+ * \return int [-1] Si hay errores o se cancelo la modificación - [0] Si se modificó el nombre
+ *
+ */
+int Edit_Nombre(LinkedList* pArrayListEmployee, int idEdit)
 {
 	Employee* pEmpleado;
 	char auxNombre[128];
@@ -281,8 +301,6 @@ int Edit_Nombre(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
 	int estado = -1;
 
 	pEmpleado = employee_BuscarPorID(pArrayListEmployee, idEdit);
-	indexEdit = ll_indexOf(pArrayListEmployee, pEmpleado);
-
 	if(pEmpleado != NULL)
 	{
 		if(utn_getString(auxNombre, "\nIngrese el nuevo nombre del empleado: ", "\n\t = | ¡Error! Ingrese un nombre válido | =\n", 128, 5) == 0)
@@ -312,7 +330,14 @@ int Edit_Nombre(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
 	return estado;
 }
 
-int Edit_Horas(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
+/** \brief Modifica las horas trabajadas de un empleado
+ *
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \param idEdit int ID del empleado a modificar
+ * \return int [-1] Si hay errores o se cancelo la modificación - [0] Si se modificaron las horas trabajadas
+ *
+ */
+int Edit_Horas(LinkedList* pArrayListEmployee, int idEdit)
 {
 	Employee* pEmpleado;
 	int auxHoras;
@@ -320,8 +345,6 @@ int Edit_Horas(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
 	int estado = -1;
 
 	pEmpleado = employee_BuscarPorID(pArrayListEmployee, idEdit);
-	indexEdit = ll_indexOf(pArrayListEmployee, pEmpleado);
-
 	if(pEmpleado != NULL)
 	{
 		if(utn_getNumEnteroV2(&auxHoras, "\nIngrese las horas trabajadas del empleado: ", "\n\t = | ¡Error! Ingrese una cifra válida | =\n\n", 1, 5) == 0)
@@ -351,7 +374,14 @@ int Edit_Horas(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
 	return estado;
 }
 
-int Edit_Sueldo(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
+/** \brief Modifica el sueldo de un empleado
+ *
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \param idEdit int ID del empleado a modificar
+ * \return int [-1] Si hay errores o se cancelo la modificación - [0] Si se modificó el sueldo
+ *
+ */
+int Edit_Sueldo(LinkedList* pArrayListEmployee, int idEdit)
 {
 	Employee* pEmpleado;
 	int auxSueldo;
@@ -359,8 +389,6 @@ int Edit_Sueldo(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
 	int estado = -1;
 
 	pEmpleado = employee_BuscarPorID(pArrayListEmployee, idEdit);
-	indexEdit = ll_indexOf(pArrayListEmployee, pEmpleado);
-
 	if(pEmpleado != NULL)
 	{
 		if(utn_getNumEnteroV2(&auxSueldo, "\nIngrese el sueldo del empleado: ", "\n\t = | ¡Error! Ingrese un sueldo válido | =\n\n", 1, 5) == 0)
@@ -390,11 +418,10 @@ int Edit_Sueldo(LinkedList* pArrayListEmployee, int idEdit, int indexEdit)
 	return estado;
 }
 
-/** \brief Baja de empleado
+/** \brief Baja de un empleado
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
@@ -450,9 +477,8 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Listar empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
@@ -464,12 +490,12 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 	{
 		len = ll_len(pArrayListEmployee);
 
-		estado = 0;
-
 		for(int i = 0; i < len; i++)
 		{
 			controller_MostrarEmpleado(pArrayListEmployee, i);
 		}
+
+		estado = 0;
 	}
 	else
 	{
@@ -481,9 +507,8 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Ordenar empleados
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
@@ -544,6 +569,12 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     return estado;
 }
 
+/** \brief Ordena la lista de empleados por nombre
+ *
+ * \param auxList LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] Si se ordeno la lista
+ *
+ */
 int OrdenamientoPorNombre(LinkedList* auxList)
 {
 	int orden;
@@ -575,6 +606,12 @@ int OrdenamientoPorNombre(LinkedList* auxList)
 	return estado;
 }
 
+/** \brief Ordena la lista de empleados por ID
+ *
+ * \param auxList LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] Si se ordeno la lista
+ *
+ */
 int OrdenamientoPorID(LinkedList* auxList)
 {
 	int orden;
@@ -603,6 +640,12 @@ int OrdenamientoPorID(LinkedList* auxList)
 	return estado;
 }
 
+/** \brief Ordena la lista de empleados por sueldo
+ *
+ * \param auxList LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] Si se ordeno la lista
+ *
+ */
 int OrdenamientoPorSueldo(LinkedList* auxList)
 {
 	int orden;
@@ -631,6 +674,12 @@ int OrdenamientoPorSueldo(LinkedList* auxList)
 	return estado;
 }
 
+/** \brief Ordena la lista de empleados por horas trabajadas
+ *
+ * \param auxList LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] Si se ordeno la lista
+ *
+ */
 int OrdenamientoPorHorasTrabajadas(LinkedList* auxList)
 {
 	int orden;
@@ -661,9 +710,9 @@ int OrdenamientoPorHorasTrabajadas(LinkedList* auxList)
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Dirección del archivo donde se guardaran los datos
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
@@ -719,11 +768,11 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
     return estado;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
+/** \brief Guarda los datos de los empleados en el archivo data.bin (modo binario).
  *
- * \param path char*
- * \param pArrayListEmployee LinkedList*
- * \return int
+ * \param path char* Dirección del archivo donde se guardaran los datos
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \return int [-1] Si hay errores - [0] En caso de exito
  *
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
@@ -771,6 +820,13 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     return estado;
 }
 
+/** \brief Muestra un empleado
+ *
+ * \param pArrayListEmployee LinkedList* Array del LinkedList
+ * \param indice int Posición del empleado a listar
+ * \return int [-1] Si hay errores - [0] En caso de exito
+ *
+ */
 int controller_MostrarEmpleado(LinkedList* pArrayListEmployee, int indice)
 {
 	int estado = -1;
@@ -797,14 +853,16 @@ int controller_MostrarEmpleado(LinkedList* pArrayListEmployee, int indice)
 		else
 		{
 			printf("\n\tError al mostrar el empleado\n");
-			estado = -1;
 		}
-
 	}
 
 	return estado;
 }
 
+/** \brief Menu con las opciones principales para interactuar con el usuario.
+ *
+ * \param opcion int* Opcion elegida
+ */
 void MenuPrincipal(int* opcion)
 {
 	printf("\n\n=============================| MENU PRINCIPAL |==============================\n");
@@ -822,6 +880,10 @@ void MenuPrincipal(int* opcion)
 	utn_getNumInt(opcion, "\nIngrese una opcion: ", "\n¡Error! Ingresa una opción del menú.\n", 1, 10);
 }
 
+/** \brief Menu con las opciones de modificación.
+ *
+ * \param opcion int* Opcion elegida
+ */
 void MenuEditarEmpleado(int* opcion)
 {
 	printf("\n ----------------------------------");
@@ -836,6 +898,10 @@ void MenuEditarEmpleado(int* opcion)
 	utn_getNumInt(opcion, "Ingrese una opción: ", "\n\t = | ¡Error! Ingresa una opción del menú | = \n\n", 1, 4);
 }
 
+/** \brief Menu con las opciones de ordenamiento.
+ *
+ * \param opcion int* Opcion elegida
+ */
 void MenuOrdenamiento(int* opcion)
 {
 	printf("\n -----------------------------------");
