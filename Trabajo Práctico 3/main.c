@@ -20,6 +20,8 @@
     10. Salir
 *****************************************************/
 
+//Jorge García 1C - Trabajo Práctico 3: Laboratorio I - Legajo: 111263
+
 int main()
 {
     int opcion = 0;
@@ -39,7 +41,7 @@ int main()
             case 1:
             	if(datosCargadosText == 0 && datosCargadosBin == 0)
             	{
-					controller_loadFromText("test.csv", listaEmpleados);
+					controller_loadFromText("data.csv", listaEmpleados);
 					datosCargadosText = 1;
             	}
             	else
@@ -51,7 +53,7 @@ int main()
             case 2:
             	if(datosCargadosBin == 0 && datosCargadosText == 0)
             	{
-            		controller_loadFromBinary("test.bin", listaEmpleados);
+            		controller_loadFromBinary("data.bin", listaEmpleados);
             		datosCargadosBin = 1;
             	}
             	else
@@ -79,7 +81,7 @@ int main()
             case 8:
             	if(datosCargadosBin == 1 || datosCargadosText == 1)
             	{
-					controller_saveAsText("test.csv", listaEmpleados);
+					controller_saveAsText("data.csv", listaEmpleados);
             	}
             	else
             	{
@@ -89,7 +91,7 @@ int main()
             case 9:
             	if(datosCargadosBin == 1 || datosCargadosText == 1)
             	{
-            		controller_saveAsBinary("test.bin", listaEmpleados);
+            		controller_saveAsBinary("data.bin", listaEmpleados);
             	}
             	else
             	{
@@ -105,5 +107,3 @@ int main()
 
     return 0;
 }
-
-//Jorge García 1°C - Trabajo Práctico 3: Laboratorio I
