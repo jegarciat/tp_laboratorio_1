@@ -32,6 +32,4 @@ int employee_CompararPorID(void* empleado1, void* empleado2);
 int employee_CompararPorSueldo(void* empleado1, void* empleado2);
 int employee_CompararPorHoras(void* empleado1, void* empleado2);
 
-
-
 #endif // employee_H_INCLUDED

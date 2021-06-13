@@ -70,6 +70,7 @@ int main()
             	controller_removeEmployee(listaEmpleados);
             	break;
             case 6:
+            	ll_sort(listaEmpleados, employee_CompararPorID, 1);
             	controller_ListEmployee(listaEmpleados);
             	break;
             case 7:
@@ -82,7 +83,7 @@ int main()
             	}
             	else
             	{
-            		printf("\n\t¡No hay nada que guardar!\n");
+            		printf("\n\t¡Tienes que cargar primero el archivo para agregarle los cambios realizados!\n");
             	}
             	break;
             case 9:
@@ -92,7 +93,7 @@ int main()
             	}
             	else
             	{
-            		printf("\n\t¡No hay nada que guardar!\n");
+               		printf("\n\t¡Tienes que cargar primero el archivo para agregarle los cambios realizados!\n");
             	}
             	break;
             case 10:
