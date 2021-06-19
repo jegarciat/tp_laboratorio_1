@@ -117,9 +117,9 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 			else
 			{
 				anteriorNode = getNode(this, nodeIndex-1);
-				if(len == nodeIndex && anteriorNode != NULL)
+				if(len == nodeIndex && anteriorNode != NULL) //Si se agrega de último
 				{
-					nuevoNode->pNextNode = NULL; //Apunto el nuevoNode a lo que apuntaba anteriorNode (NULL u otro nodo)
+					nuevoNode->pNextNode = NULL; //Apunto el nuevoNode a NULL ya que es el último
 					anteriorNode->pNextNode = nuevoNode; //El anteriorNode lo apunto al que cree
 				}
 				else
