@@ -23,6 +23,7 @@
 #include "../testing/inc/main_test.h"
 #include "../inc/LinkedList.h"
 
+//Jorge García 1C - Trabajo Práctico 4: Laboratorio I - Legajo: 111263
 
 int main(void)
 {
