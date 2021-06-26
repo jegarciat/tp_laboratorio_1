@@ -244,7 +244,7 @@ int ll_remove(LinkedList* this,int index)
 		{
 			if(index == 0) //Si es el primer nodo
 			{
-				this->pFirstNode = pNodeAux->pNextNode; //El primer nodo de lista pasa a ser el siguien al que se va a remover
+				this->pFirstNode = pNodeAux->pNextNode; //El primer nodo de lista pasa a ser el siguiente al que se va a remover
 				free(pNodeAux);
 			}
 			else
@@ -265,7 +265,6 @@ int ll_remove(LinkedList* this,int index)
     return returnAux;
 }
 
-
 /** \brief Elimina todos los elementos de la lista
  *
  * \param this LinkedList* Puntero a la lista
@@ -280,19 +279,14 @@ int ll_clear(LinkedList* this)
 
 	if(this != NULL)
 	{
-		for(int i = len-1; i >= 0; i--)
+		for(int i = 0; i < len; i++)
 		{
-			ll_remove(this, i);
+			ll_remove(this, 0);
 		}
 
 		returnAux = 0;
 
-		/*for(int i = 0; i < len; i++)
-		{
-			ll_remove(this, i);
-		}
-
-		if(ll_len(this) == 0) //Comprueba si se limpio toda la lista
+		/*if(ll_len(this) == 0) //Comprueba si se limpio toda la lista
 		{
 			returnAux = 0;
 		}*/
@@ -367,13 +361,11 @@ int ll_isEmpty(LinkedList* this)
 
 	if(this != NULL)
 	{
+		returnAux = 1; //Si esta vacia
+
 		if(len > 0)
 		{
 			returnAux = 0; //Si no esta vacia
-		}
-		else
-		{
-			returnAux = 1; //Si esta vacia
 		}
 	}
     return returnAux;
@@ -419,8 +411,8 @@ void* ll_pop(LinkedList* this,int index)
 
 	if(this != NULL && index >= 0 && index <= len)
 	{
-		pElement = ll_get(this, index);
-		if(pElement != NULL && ll_remove(this, index) == 0)
+		pElement = ll_get(this, index); //Obtengo el elemento apuntado por index
+		if(pElement != NULL && ll_remove(this, index) == 0) //Libero el nodo y retorno el elemento que apunta
 		{
 			returnAux = pElement;
 		}
@@ -444,11 +436,11 @@ int ll_contains(LinkedList* this, void* pElement)
 
 	if(this != NULL)
 	{
-		returnAux = 0;
+		returnAux = 0; //Si no esta en la lista
 
-		if(ll_indexOf(this, pElement) != -1)
+		if(ll_indexOf(this, pElement) != -1) //Si indexOf me devolvio un indice
 		{
-			returnAux = 1; //Si está en lista
+			returnAux = 1; //Si esta en lista
 		}
 	}
 
@@ -478,7 +470,7 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 		{
 			auxElement = ll_get(this2, i);
 
-			if(auxElement != NULL && ll_contains(this, auxElement) == 0) //Busco si hay un elemento que NO este en this
+			if(auxElement != NULL && ll_contains(this, auxElement) == 0) //Busco si hay un elemento que NO este en this con ll_contains (devuelve 0 si no está)
 			{
 				returnAux = 0;
 				break;
@@ -514,7 +506,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     		for(int i = from; i < to; i++)
     		{
     			auxElement = ll_get(this, i);
-    			ll_add(cloneList, auxElement);
+    			ll_add(cloneList, auxElement); //Agrego los elementos que entran en el rango pasado como parámetro
     		}
     	}
     }
