@@ -252,6 +252,7 @@ int utn_getNumEntero(int* pResultado, char* mensaje, char* mensajeError, int min
             {
 				printf("%s", mensajeError);
             }
+            reintentos--;
 
 		} while(reintentos >= 0);
 	}
@@ -281,6 +282,7 @@ int utn_getNumEnteroV2(int* pResultado, char* mensaje, char* mensajeError, int m
 			{
 				printf("%s", mensajeError);
 			}
+			reintentos--;
 
 		} while(reintentos >= 0);
 	}
@@ -415,6 +417,7 @@ int utn_getFlotante(float* pResultado, char* mensaje, char* mensajeError, float 
 			{
 				printf("%s", mensajeError);
 			}
+			reintentos--;
 
 		} while(reintentos >= 0);
 	}
@@ -473,7 +476,10 @@ int utn_getAlfaNumerico(char* input, char* mensaje, char* mensajeError, int long
                 break;
             }
 
-			printf("%s", mensajeError);
+			if(reintentos != 0)
+			{
+				printf("%s", mensajeError);
+			}
 			reintentos--;
 
         } while(reintentos >= 0);
