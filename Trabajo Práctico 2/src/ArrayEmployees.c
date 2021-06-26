@@ -4,7 +4,7 @@
  * \brief Increases the base employee ID by 1 and returns it.
 * \return int (-1) if Error [Invalid length or NULL pointer] - (Last ID + 1) if Ok
  */
-static int GetID(sEmployee* list, int len)
+static int Employee_GetID(sEmployee* list, int len)
 {
 	int maxID;
 	int auxID = -1;
@@ -90,9 +90,9 @@ sEmployee Employee_RequestData(sEmployee* list, int len)
 	  utn_getFlotante(&auxEmployee.salary, "\nIngresa el salario del empleado: ", "\n\t = | ¡Error! Ingrese un salario válido | =\n", 1, 999999, 20) == 0)
 	{
 		printSectors();
-		if(utn_getNumEntero(&auxEmployee.sector, "\nIngresa el ID del sector: ", "\n\t = | ¡Error! Ingrese ID válido | =\n", 1, 3, 20) == 0)
+		if(utn_getNumEntero(&auxEmployee.sector, "\nIngresa el ID del sector: ", "\n\t = | ¡Error! Ingrese un ID sector válido | =\n", 1, 3, 20) == 0)
 		{
-			auxEmployee.id = GetID(list, len);
+			auxEmployee.id = Employee_GetID(list, len);
 			flag = 0;
 		}
 	}
@@ -136,15 +136,17 @@ int addEmployee(sEmployee* list, int len, int id, char name[], char lastName[], 
 
 void printSectors()
 {
-	printf("\n |----------------------|\n");
-	printf(" |       SECTORES       |\n");
-	printf(" |----------------------|\n");
-	printf(" |  MARKETING   | ID: 1 |\n");
-	printf(" |----------------------|\n");
-	printf(" |     RRHH     | ID: 2 |\n");
-	printf(" |----------------------|\n");
-	printf(" |   SISTEMAS   | ID: 3 |\n");
-	printf(" |----------------------|\n");
+	printf("\n |-----------------------|\n");
+	printf(" |       SECTORES        |\n");
+	printf(" |-----------------------|\n");
+	printf(" |  DESCRIPCION  |  ID   |\n");
+	printf(" |-----------------------|\n");
+	printf(" | MARKETING     |   1   |\n");
+	printf(" |-----------------------|\n");
+	printf(" | RRHH          |   2   |\n");
+	printf(" |-----------------------|\n");
+	printf(" | SISTEMAS      |   3   |\n");
+	printf(" |-----------------------|\n");
 }
 
 int removeEmployee(sEmployee* list, int len, int id)
@@ -502,7 +504,7 @@ void TestEmployees(sEmployee* list, int len)
 
 	for(int i = 0; i < len; i++)
 	{
-		list[i].id = GetID(list, len);
+		list[i].id = Employee_GetID(list, len);
 		strcpy(list[i].name, auxName[i]);
 		strcpy(list[i].lastName, auxLastName[i]);
 		list[i].salary = salary[i];

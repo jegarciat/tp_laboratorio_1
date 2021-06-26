@@ -36,7 +36,7 @@ int AcomodarString(char* cadena);
 int Confirmar(char* respuesta, char* confirmarMensaje);
 
 /**
- * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en pResultado
+ * \brief Solicita Un numero entero al usuario con reintentos, lo verifica y lo copia en el puntero pResultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \param mensaje El mensaje a ser mostrado
  * \param mensajeError Mensaje a ser mostrado en caso de no ser una opcion valida
@@ -49,7 +49,7 @@ int Confirmar(char* respuesta, char* confirmarMensaje);
 int utn_getNumEntero(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
 
 /**
- * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en pResultado
+ * \brief Solicita Un numero entero al usuario con reintentos y sin rango máximo, lo verifica y lo copia en pResultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \param mensaje El mensaje a ser mostrado
  * \param mensajeError Mensaje a ser mostrado en caso de no ser una opcion valida
@@ -60,7 +60,7 @@ int utn_getNumEntero(int* pResultado, char* mensaje, char* mensajeError, int min
 int utn_getNumEnteroV2(int* pResultado, char* mensaje, char* mensajeError, int minimo, int reintentos);
 
 /**
- * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en pResultado
+ * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en el puntero pResultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \param mensaje El mensaje a ser mostrado
  * \param mensajeError Mensaje a ser mostrado en caso de no ser una opcion valida
@@ -72,7 +72,7 @@ int utn_getNumEnteroV2(int* pResultado, char* mensaje, char* mensajeError, int m
 int utn_getNumInt(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo);
 
 /**
- * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en pResultado
+ * \brief Solicita Un numero entero al usuario sin rango máximo, lo verifica y lo copia en el puntero pResultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \param mensaje El mensaje a ser mostrado
  * \param mensajeError Mensaje a ser mostrado en caso de no ser una opcion valida
@@ -83,7 +83,7 @@ int utn_getNumInt(int* pResultado, char* mensaje, char* mensajeError, int minimo
 int utn_getNumIntSM(int* pResultado, char* mensaje, char* mensajeError, int minimo);
 
 /**
- * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en pResultado
+ * \brief Solicita Un numero entero al usuario, lo verifica y lo copia en el puntero pResultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \param mensaje El mensaje a ser mostrado
  * \param mensajeError Mensaje a ser mostrado en caso de no ser un operando valido
@@ -96,7 +96,7 @@ int utn_getNumIntSM(int* pResultado, char* mensaje, char* mensajeError, int mini
 int utn_getFlotante(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos);
 
 /**
- * \brief Solicita Un texto alfanumerico al usuario, lo verifica y lo copia en pResultado
+ * \brief Solicita Un texto alfanumerico al usuario, lo verifica y lo copia en el puntero pResultado
  * \param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
  * \param longitud Es la longitud del texto
  * \param mensaje El mensaje a ser mostrado

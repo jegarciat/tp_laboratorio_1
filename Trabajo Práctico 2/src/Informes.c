@@ -105,7 +105,6 @@ void Reports(sEmployee* list, int len)
 	do
 	{
 		Reports_Menu(&option);
-
 		switch(option)
 		{
 			case 1:

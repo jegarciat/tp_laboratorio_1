@@ -1,10 +1,3 @@
-/*
- * Informes.h
- *
- *  Programa: Trabajo práctico 2
- *      Author: Jorge García 1°C
- */
-
 #ifndef INFORMES_H_
 #define INFORMES_H_
 

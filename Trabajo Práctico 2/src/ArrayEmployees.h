@@ -1,10 +1,3 @@
-/*
- * ArrayEmployees.h
- *
- *  Programa: Trabajo práctico 2
- *      Author: Jorge García 1°C
- */
-
 #ifndef ARRAYEMPLOYEES_H_
 #define ARRAYEMPLOYEES_H_
 

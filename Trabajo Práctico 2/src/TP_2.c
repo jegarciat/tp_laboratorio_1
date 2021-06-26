@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Programa    : Trabajo practico 2 - Laboratorio I
- Autor       : Jorge García
+ Autor       : Jorge Enrique García Torrebilla
  Legajo      : 111263
  División    : 1°C
  ============================================================================
