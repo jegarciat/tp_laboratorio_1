@@ -13,15 +13,15 @@
 
 /**
  * \brief Function that shows the main menu, asks the user for an option and validate it.
- * \return The option chosen by the user (1 to 5).
+ * \return void.
  */
-int MainMenu();
+void MainMenu(int* option);
 
 /**
 * \brief Function that displays the reports menu, prompts the user for an option and validate it.
-* \return The option chosen by the user (1 to 3).
+* \return void.
  */
-int Reports_Menu();
+void Reports_Menu(int* option);
 
 /** \brief Calculate the total amount of salary for all employees.
 *

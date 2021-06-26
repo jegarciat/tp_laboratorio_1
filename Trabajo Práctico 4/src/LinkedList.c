@@ -117,21 +117,13 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 			else
 			{
 				anteriorNode = getNode(this, nodeIndex-1);
-				if(len == nodeIndex && anteriorNode != NULL) //Si se agrega de último
-				{
-					nuevoNode->pNextNode = NULL; //Apunto el nuevoNode a NULL ya que es el último
-					anteriorNode->pNextNode = nuevoNode; //El anteriorNode lo apunto al que cree
-				}
-				else
-				{
-					nuevoNode->pNextNode = anteriorNode->pNextNode; //Apunto el nuevoNode a lo que apuntaba anteriorNode (NULL u otro nodo)
-					anteriorNode->pNextNode = nuevoNode; //El anteriorNode lo apunto al que cree
-				}
+				nuevoNode->pNextNode = anteriorNode->pNextNode; //Apunto el nuevoNode a lo que apuntaba anteriorNode
+				anteriorNode->pNextNode = nuevoNode; //El anteriorNode lo apunto al que cree
 			}
-		}
 
-		this->size++;
-		returnAux = 0;
+			this->size++;
+			returnAux = 0;
+		}
 	}
 
     return returnAux;
@@ -189,11 +181,11 @@ void* ll_get(LinkedList* this, int index)
 
     if(this != NULL && index >= 0 && index <= len)
     {
-    	pNodeAux = getNode(this, index);
+    	pNodeAux = getNode(this, index); //Obtengo el nodo en el index especificado
 
     	if(pNodeAux != NULL)
     	{
-			returnAux = pNodeAux->pElement;
+			returnAux = pNodeAux->pElement; //Retorno el elemento apuntado por el nodo
     	}
     }
 
@@ -252,7 +244,7 @@ int ll_remove(LinkedList* this,int index)
 		{
 			if(index == 0) //Si es el primer nodo
 			{
-				this->pFirstNode = pNodeAux->pNextNode;
+				this->pFirstNode = pNodeAux->pNextNode; //El primer nodo de lista pasa a ser el siguien al que se va a remover
 				free(pNodeAux);
 			}
 			else
@@ -260,7 +252,7 @@ int ll_remove(LinkedList* this,int index)
 				anteriorNode = getNode(this, index-1);
 				if(anteriorNode != NULL)
 				{
-					anteriorNode->pNextNode = pNodeAux->pNextNode;
+					anteriorNode->pNextNode = pNodeAux->pNextNode; //Apunto el anteriorNode a lo que apuntaba el nodo a remover (NULL u otro nodo)
 					free(pNodeAux);
 				}
 			}
@@ -288,20 +280,22 @@ int ll_clear(LinkedList* this)
 
 	if(this != NULL)
 	{
-		for(int i = len; i >= 0; i--)
+		for(int i = len-1; i >= 0; i--)
 		{
 			ll_remove(this, i);
 		}
+
+		returnAux = 0;
 
 		/*for(int i = 0; i < len; i++)
 		{
 			ll_remove(this, i);
-		}*/
+		}
 
-		if(ll_len(this) == 0) //Si se limpio toda la lista
+		if(ll_len(this) == 0) //Comprueba si se limpio toda la lista
 		{
 			returnAux = 0;
-		}
+		}*/
 	}
 
     return returnAux;
@@ -345,7 +339,7 @@ int ll_indexOf(LinkedList* this, void* pElement)
 	{
 		for(int i = 0; i < len; i++)
 		{
-			pNode = getNode(this, i);
+			pNode = getNode(this, i); //Obtengo nodo por nodo hasta que encuentre un nodo que apunte a pElement
 
 			if(pNode != NULL && pNode->pElement == pElement)
 			{
@@ -375,11 +369,11 @@ int ll_isEmpty(LinkedList* this)
 	{
 		if(len > 0)
 		{
-			returnAux = 0;
+			returnAux = 0; //Si no esta vacia
 		}
 		else
 		{
-			returnAux = 1;
+			returnAux = 1; //Si esta vacia
 		}
 	}
     return returnAux;
@@ -450,13 +444,11 @@ int ll_contains(LinkedList* this, void* pElement)
 
 	if(this != NULL)
 	{
+		returnAux = 0;
+
 		if(ll_indexOf(this, pElement) != -1)
 		{
 			returnAux = 1; //Si está en lista
-		}
-		else
-		{
-			returnAux = 0; //Si NO está en la lista
 		}
 	}
 
@@ -515,7 +507,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 
     if(this != NULL && from >= 0 && from < to && to > from && to <= len)
     {
-    	cloneList = ll_newLinkedList(); //Lista con los elementos a buscar
+    	cloneList = ll_newLinkedList();
 
     	if(cloneList != NULL)
     	{
@@ -530,8 +522,6 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     return cloneList;
 }
 
-
-
 /** \brief Crea y retorna una nueva lista con los elementos de la lista pasada como parametro
  *
  * \param pList LinkedList* Puntero a la lista
@@ -540,17 +530,12 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 */
 LinkedList* ll_clone(LinkedList* this)
 {
-    LinkedList* cloneList = NULL;
+    LinkedList* cloneList;
     int len = ll_len(this);
 
     if(this != NULL)
     {
-    	cloneList = ll_newLinkedList();
-
-    	if(cloneList != NULL)
-    	{
-    		cloneList = ll_subList(this, 0, len);
-    	}
+		cloneList = ll_subList(this, 0, len);
     }
 
     return cloneList;

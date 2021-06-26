@@ -30,12 +30,6 @@ typedef struct
 
 }sEmployee;
 
-/**
- * \brief Increases the base employee ID by 1 and returns it.
- * \return Incremental integer by 1 unrepeatable.
- */
-int Employee_GetID();
-
 /** \brief To indicate that all position in the array are empty,
     	   this function put the flag (isEmpty) in TRUE in all
 		   position of the array
@@ -68,59 +62,113 @@ int FindEmployeeByID(sEmployee* list, int len, int id);
 int Employees_SearchFree(sEmployee* list, int len);
 
 /** \brief add in an existing list of employees the data of an employee
- * 		   in the first empty position
- * \param list sEmployee* Pointer to array of employees
- * \param len int Array length
-* \param auxIndex int Free position where data is loaded
-* \return int Return (-1) if error [Invalid length or NULL pointer or without
-		  free space] - (0) if Ok
+* 		   in the first empty position
+* \param list sEmployee* Pointer to array of employees
+* \param len int Array length
+* \param id int ID to register
+* \param name[] char name to register
+* \param lastName[] char lastName to register
+* \param salary float salary to register
+* \param sector int sector to register
+* \return int Return (-1) if error [Invalid length or NULL pointer or without free space] -
+* 					  (0) if Ok
 *
 */
-int addEmployee(sEmployee* list, int len, int auxIndex);
+int addEmployee(sEmployee* list, int len, int id, char name[], char lastName[], float salary, int sector);
+
+/** \brief Request an employee's data
+ *
+ * \param list sEmployee* Pointer to array of employees
+ * \param len int Array length
+ * \return int Return (Employee) if Ok
+ *
+*/
+sEmployee Employee_RequestData(sEmployee* list, int len);
 
 /** \brief Remove a Employee by Id (put isEmpty Flag in 1)
 *
- * \param list sEmployee* Pointer to array of employees
- * \param len int Array length
+* \param list sEmployee* Pointer to array of employees
+* \param len int Array length
 * \param id int ID to be removed
-* \return int Return (-1) if the entered id does not exist
-* 		  (-2) if the remove was canceled or if error [Invalid length or NULL pointer]
-*  		  (0) if Ok
+* \return int Return (-1) if the remove was canceled or if error [Invalid length or NULL pointer]
+*  		 			  (0) if Ok
 *
 */
 int removeEmployee(sEmployee* list, int len, int id);
 
 /**
  * \brief Function that provides the options to modify an employee, asks the user for an option and validates it.
- * \return The chosen option (1 to 5).
+ * \return void.
  */
-int ModificationMenu();
+void ModificationMenu(int* option);
 
 /**
  * \brief Modify an employee using an ID entered by the user.
  * \param list sEmployee* Pointer to array of employees
  * \param len int Array length
- * \return (-2) If the modification was canceled or if Error [Invalid length or NULL pointer]
- *         (-1) If the entered ID does not exist.
- *          (0) if Ok.
  */
-int ModifyEmployee(sEmployee* list, int len);
+void ModifyEmployee(sEmployee* list, int len);
+
+/** \brief Modify an employee's name
+*
+* \param list sEmployee* Pointer to array of employees
+* \param indexEdit int the position of the employee to modify
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int Edit_Name(sEmployee* list, int indexEdit);
+
+/** \brief Modify an employee's last name
+*
+* \param list sEmployee* Pointer to array of employees
+* \param indexEdit int the position of the employee to modify
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int Edit_LastName(sEmployee* list, int indexEdit);
+
+/** \brief Modify an employee's salary
+*
+* \param list sEmployee* Pointer to array of employees
+* \param indexEdit int the position of the employee to modify
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int Edit_Salary(sEmployee* list, int indexEdit);
+
+/** \brief Modify an employee's sector
+*
+* \param list sEmployee* Pointer to array of employees
+* \param indexEdit int the position of the employee to modify
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int Edit_Sector(sEmployee* list, int indexEdit);
 
 /** \brief Sort the elements in the array of employees, the argument order
 indicate UP or DOWN order
 *
- * \param list sEmployee* Pointer to array of employees
- * \param len int Array length
+* \param list sEmployee* Pointer to array of employees
+* \param len int Array length
 * \param order int [0] indicate UP - [1] indicate DOWN
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 *
 */
 int sortEmployees(sEmployee* list, int len, int order);
 
+/** \brief Sort employees by ID from highest to lowest
+*
+* \param list sEmployee* Pointer to array of employees
+* \param len int Array length
+* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+*
+*/
+int sortEmployeesByID(sEmployee* list, int len);
+
 /** \brief print the content of employees array
 *
- * \param list sEmployee* Pointer to array of employees
- * \param len int Array length
+* \param list sEmployee* Pointer to array of employees
+* \param len int Array length
 * \return int retorno (-1) If there are no loaded employees or if Error [Invalid length or NULL pointer]
 * 		  (0) if Ok
 *
@@ -129,7 +177,7 @@ int printEmployees(sEmployee* list, int len);
 
 /** \brief Print a single employee.
 *
- * \param sEmployee auxEmployee A single employee to be displayed
+* \param sEmployee auxEmployee A single employee to be displayed
 * \return void
 *
 */

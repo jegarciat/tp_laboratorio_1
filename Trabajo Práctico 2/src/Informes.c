@@ -1,32 +1,29 @@
-
 #include "Informes.h"
 
-int MainMenu()
+void MainMenu(int* option)
 {
-	int option;
-
-	printf("\n GESTIÓN DE EMPLEADOS \n");
-	printf("\n 1. Alta\n");
-	printf("\n 2. Modificar empleado\n");
-	printf("\n 3. Baja\n");
-	printf("\n 4. Informes\n");
-	printf("\n 5. Salir\n");
-	option = utn_getEntero("\nElija un opción: ", "\nOpción inválida, ingrese nuevamente: ", 1, 5);
-
-	return option;
+	printf("\n |--------------------------------|");
+	printf("\n |      GESTIÓN DE EMPLEADOS      |\n");
+	printf(" |--------------------------------|\n");
+	printf(" | 1. ALTAS                       |\n");
+	printf(" | 2. MODIFICAR EMPLEADO          |\n");
+	printf(" | 3. BAJA                        |\n");
+	printf(" | 4. INFORMES                    |\n");
+	printf(" | 5. SALIR                       |\n");
+	printf(" |--------------------------------|\n");
+	utn_getNumInt(option, "\nIngresa una opcion: ", "\n\t¡Error! Ingresa una opción del menú.\n", 1, 5);
 }
 
-int Reports_Menu()
+void Reports_Menu(int* option)
 {
-	int option;
-
-	printf("\n\n INFORMES\n");
-	printf("\n1. Listado de los empleados ordenados alfabéticamente por Apellido y Sector.\n");
-	printf("2. Total y promedio de los salarios, y cuántos empleados superan el salario promedio.\n");
-	printf("3. Volver al menú principal\n");
-	option = utn_getEntero("\nElija una opción: ","\nOpción inválida, ingrese nuevamente: ", 1, 3);
-
-	return option;
+	printf("\n -------------------------------------------------------------------------------------------");
+	printf("\n |                                   INFORMES                                              |\n");
+	printf(" -------------------------------------------------------------------------------------------\n");
+	printf(" | 1. Listado de los empleados ordenados alfabéticamente por Apellido y Sector.            |\n");
+	printf(" | 2. Total y promedio de los salarios, y cuántos empleados superan el salario promedio.   |\n");
+	printf(" | 3. Volver al menú principal                                                             |\n");
+	printf(" -------------------------------------------------------------------------------------------\n");
+	utn_getNumInt(option, "\nIngresa una opcion: ", "\n\t¡Error! Ingresa una opción del menú.\n", 1, 3);
 }
 
 float TotalSalary(sEmployee* list, int len)
@@ -67,7 +64,7 @@ float AverageSalary(sEmployee* list, int len)
 
 		if(quantyEmployees > 0)
 		{
-			average = auxTotalSalary/(float)quantyEmployees;
+			average = auxTotalSalary/quantyEmployees;
 		}
 		else
 		{
@@ -100,36 +97,35 @@ void Reports(sEmployee* list, int len)
 {
 	char answer;
 	int optionOrder;
+	int counterHighSalary;
+	int option;
 	float totalSalary;
 	float averageSalary;
-	int counterHighSalary;
 
 	do
 	{
-		switch(Reports_Menu())
+		Reports_Menu(&option);
+
+		switch(option)
 		{
 			case 1:
-
-				optionOrder = utn_getEntero("\nIngrese 0 para ordenar de forma ascendente.\nIngrese 1 para ordenar de forma descendente.\n\nElija una opción de ordenamiento: ",
-											"¡Error! Reingrese un opción válida 0 (ascedente) o 1 (descendente): ", 0, 1);
+				utn_getNumInt(&optionOrder, "\nIngrese 0 para ordenar de forma ascendente.\nIngrese 1 para ordenar de forma descendente.\n\nElija una opción de ordenamiento: ",
+							"\n¡Error! Ingrese un opción válida 0 (ascedente) o 1 (descendente)\n", 0, 1);
 				sortEmployees(list, len, optionOrder);
 				printEmployees(list, len);
-
 				break;
 
 			case 2:
-
 				totalSalary = TotalSalary(list, len);
 				printf("\nEl salario total es de: %.2f$\n", totalSalary);
 				averageSalary = AverageSalary(list, len);
 				printf("\nEl salario promedio es de: %.2f$\n", averageSalary);
 				counterHighSalary = QuantityEmployeesWithHighSalary(list, len, averageSalary);
 				printf("\nLa cantidad de empleados que superan el salario promedio es de: %d empleados\n", counterHighSalary);
-
 				break;
 
 			case 3:
-				answer = Confirmar("\n¿Seguro? (s/n): ");
+				Confirmar(&answer, "\n¿Estás seguro/a? (s/n): ");
 				break;
 		}
 
