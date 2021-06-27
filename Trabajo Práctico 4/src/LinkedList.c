@@ -285,11 +285,6 @@ int ll_clear(LinkedList* this)
 		}
 
 		returnAux = 0;
-
-		/*if(ll_len(this) == 0) //Comprueba si se limpio toda la lista
-		{
-			returnAux = 0;
-		}*/
 	}
 
     return returnAux;
@@ -333,7 +328,7 @@ int ll_indexOf(LinkedList* this, void* pElement)
 	{
 		for(int i = 0; i < len; i++)
 		{
-			pNode = getNode(this, i); //Obtengo nodo por nodo hasta que encuentre un nodo que apunte a pElement
+			pNode = getNode(this, i); //Obtengo nodo por nodo hasta que encuentre uno que apunte a pElement
 
 			if(pNode != NULL && pNode->pElement == pElement)
 			{
@@ -411,8 +406,8 @@ void* ll_pop(LinkedList* this,int index)
 
 	if(this != NULL && index >= 0 && index <= len)
 	{
-		pElement = ll_get(this, index); //Obtengo el elemento apuntado por index
-		if(pElement != NULL && ll_remove(this, index) == 0) //Libero el nodo y retorno el elemento que apunta
+		pElement = ll_get(this, index); //Obtengo el elemento apuntado por el nodo
+		if(pElement != NULL && ll_remove(this, index) == 0) //Libero el nodo y retorno el elemento que apuntaba
 		{
 			returnAux = pElement;
 		}
@@ -470,7 +465,7 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 		{
 			auxElement = ll_get(this2, i);
 
-			if(auxElement != NULL && ll_contains(this, auxElement) == 0) //Busco si hay un elemento que NO este en this con ll_contains (devuelve 0 si no está)
+			if(auxElement != NULL && ll_contains(this, auxElement) == 0) //Busco si hay un elemento que NO este en this
 			{
 				returnAux = 0;
 				break;
