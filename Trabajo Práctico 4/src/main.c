@@ -22,6 +22,8 @@
 #include <string.h>
 #include "../testing/inc/main_test.h"
 #include "../inc/LinkedList.h"
+#include "../inc/Controller.h"
+#include "../inc/Employee.h"
 
 //Jorge García 1C - Trabajo Práctico 4: Laboratorio I - Legajo: 111263
 
@@ -48,6 +50,97 @@ int main(void)
 	//startTesting(17); // ll_subList
 	//startTesting(18); // ll_clone
 	//startTesting(19); // ll_sort
+
+    int opcion = 0;
+    int datosCargadosText = 0;
+    int datosCargadosBin = 0;
+
+    LinkedList* listaEmpleados = ll_newLinkedList();
+
+    do
+    {
+    	MenuPrincipal(&opcion);
+
+        switch(opcion)
+        {
+            case 1:
+            	if(datosCargadosText == 0 && datosCargadosBin == 0)
+            	{
+					if(controller_loadFromText("data.csv", listaEmpleados) == 0)
+					{
+						datosCargadosText = 1;
+					}
+            	}
+            	else
+            	{
+            		printf("\n\t¡Ya se cargo archivo!\n");
+            	}
+                break;
+
+            case 2:
+            	if(datosCargadosBin == 0 && datosCargadosText == 0)
+            	{
+            		if(controller_loadFromBinary("data.bin", listaEmpleados) == 0)
+            		{
+						datosCargadosBin = 1;
+            		}
+            	}
+            	else
+            	{
+            		printf("\n\t¡Ya se cargo archivo!\n");
+            	}
+
+            	break;
+            case 3:
+            	controller_addEmployee(listaEmpleados);
+            	break;
+            case 4:
+            	controller_editEmployee(listaEmpleados);
+            	break;
+            case 5:
+            	controller_removeEmployee(listaEmpleados);
+            	break;
+            case 6:
+            	ll_sort(listaEmpleados, employee_CompararPorID, 1);
+            	controller_ListEmployee(listaEmpleados);
+            	break;
+            case 7:
+            	controller_sortEmployee(listaEmpleados);
+            	break;
+            case 8:
+            	if(controller_Reubicar(listaEmpleados) == 0)
+            	{
+            		controller_ListEmployee(listaEmpleados);
+            		printf("\n\t\t\t¡Reubicacion exitosa!\n");
+            	}
+            	break;
+            	break;
+            case 9:
+            	if(datosCargadosBin == 1 || datosCargadosText == 1)
+            	{
+					controller_saveAsText("data.csv", listaEmpleados);
+            	}
+            	else
+            	{
+            		printf("\n\t¡Tienes que cargar primero el archivo para agregarle los cambios realizados!\n");
+            	}
+            	break;
+            case 10:
+            	if(datosCargadosBin == 1 || datosCargadosText == 1)
+            	{
+            		controller_saveAsBinary("data.bin", listaEmpleados);
+            	}
+            	else
+            	{
+               		printf("\n\t¡Tienes que cargar primero el archivo para agregarle los cambios realizados!\n");
+            	}
+            	break;
+            case 11:
+            	printf("\n\t¡Saliste del programa!\n");
+            	break;
+        }
+
+    }while(opcion != 12);
 
     return 0;
 }
